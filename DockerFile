@@ -1,0 +1,28 @@
+# Use official Java 21 image
+FROM eclipse-temurin:21-jdk-jammy
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Copy Maven wrapper and pom first for dependency caching
+COPY mvnw .
+COPY .mvn .mvn
+COPY pom.xml .
+
+# Make Maven wrapper executable (needed for Linux)
+RUN chmod +x mvnw
+
+# Download all Maven dependencies without building project
+RUN ./mvnw dependency:go-offline -B
+
+# Copy source code and resources
+COPY src ./src
+
+# Build the Spring Boot app and skip tests for faster build
+RUN ./mvnw clean package -DskipTests
+
+# Expose port 8080 (Render will override with its assigned PORT)
+EXPOSE 8080
+
+# Run the Spring Boot JAR (replace with your actual JAR name if different)
+CMD ["java", "-jar", "target/app-0.0.1-SNAPSHOT.jar"]
