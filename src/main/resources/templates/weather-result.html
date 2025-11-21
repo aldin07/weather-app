@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Forecast</title>
+</head>
+<body>
+    <h1>Weather Result</h1>
+
+    <p>City: <span th:text="${weather['name']}">City</span></p>
+    <p>Temperature: <span th:text="${weather['main']['temp']}">--</span> °C</p>
+    <p>Humidity: <span th:text="${weather['main']['humidity']}">--</span> %</p>
+    <p>Condition: <span th:text="${weather['weather'][0]['description']}">--</span></p>
+
+    <a href="/" th:href="@{/}">Search again</a>
+</body>

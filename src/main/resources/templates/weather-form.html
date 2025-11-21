@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title> Weather Forecast</title>
+    </head>
+    <body>
+        <h1> Weather Forecast</h1>
+        <form action ="/forecast" method="post" h:action="@{/forecast}">
+            <label for="city"> City Name: </label>
+            <input type="text" id="city" name="city" placeholder="e.g Manila" required>
+            <button type="submit"> Get Weather</button>
+        </form>
+    </body>
+</html>
